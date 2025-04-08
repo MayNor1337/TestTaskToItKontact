@@ -26,7 +26,7 @@ jobs:
       working-directory: .
 
     - name: Build
-      run: dotnet build TestTaskToItKontact.sln --no-restore --configuration
+      run: dotnet build TestTaskToItKontact.sln --no-restore
       working-directory: .
 
     - name: Tests
