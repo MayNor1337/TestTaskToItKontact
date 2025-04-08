@@ -20,9 +20,12 @@ jobs:
 
     - name: Restore dependencies
       run: dotnet restore TestTaskToItKontact.sln
+      working-directory: .
 
     - name: Build
       run: dotnet build TestTaskToItKontact.sln --no-restore --configuration
+      working-directory: .
 
     - name: Tests
       run: dotnet test TestTaskToItKontact.sln --no-build
+      working-directory: .
