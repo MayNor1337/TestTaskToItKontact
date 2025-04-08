@@ -1,0 +1,28 @@
+﻿version: "3.9"
+services:
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=S3cure@Password!
+    ports:
+      - "1433:1433"
+    networks:
+      - appnet
+
+  testtasktoitkontact:
+    image: testtasktoitkontact
+    build:
+      dockerfile: TestTaskToItKontact/Dockerfile
+    depends_on:
+      - db
+    environment:
+      - ConnectionStrings__ConnectionStrings=Server=sqlserver;Database=TestDb;User=sa;Password=S3cure@Password!;TrustServerCertificate=true;
+    command: [ "example.csv" ]
+    networks:
+        - appnet
+
+networks:
+  appnet:
+    driver: bridge
